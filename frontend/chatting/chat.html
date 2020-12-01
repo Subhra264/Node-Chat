@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="chat.css">
+
+    <title>Tessanger</title>
+</head>
+
+<body>
+    <nav>
+        <div class="left-nav">
+            <a href="#" class="logo">Titchat</a>
+            <a href="#">Account</a>
+            <a href="#">Search</a>
+            <a href="#">Settings</a>
+        </div>
+        <div class="right-nav">
+            Change Theme
+        </div>
+    </nav>
+
+    <div class="appContainer">
+        <div class="add-group">
+            <!-- <div class="group-container"> -->
+            <a href="#">+</a>
+            <a href="#">+</a>
+            <a href="#">+</a>
+            <!-- </div> -->
+        </div>
+
+        <div class="group-options">
+            <div class="channels">
+                Lorem, ipsum dolor.
+            </div>
+            <div class="channels">
+                Lorem, ipsum dolor.
+            </div>
+            <div class="channels">
+                Lorem, ipsum dolor.
+            </div>
+        </div>
+
+        <!-- <img src="tessanger-logo.png" alt="Tessenger" width="18%" height="auto"> -->
+        <div class="main">
+            <div class="message-container">
+                <!-- <div class="left">
+                <div class = "leftHeader">header</div>
+                <div class = "leftContent">Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus rem tenetur ipsum praesentium, consequuntur fugiat?
+            </div>
+            <div class="right">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam, odio.
+            </div>
+            <div class="notification">
+                Lorem ipsum dolor sit amet.
+            </div> -->
+            </div>
+
+            <div class="messageOptions">
+                <textarea name="message" id="message" placeholder="Type here..." data-emojiable="true"></textarea>
+                <div class="options-container">
+                    <div class="container" onclick="clickedIcon()">I</div>
+                    <div class="opt-cont-dropdown show">
+                        <div class="voice-message-options">
+                            <div class="options" id="voice" onclick="sendVoiceMessage()">V</div>
+                            <div class="options show" id="stop-voice">P</div>
+                            <div class="options show" id="delete-voice">D</div>
+                        </div>
+
+                        <div class="options" id="camera" onclick="clickedCamera()">C</div>
+
+                        <!-- THE MODAL BOX -->
+                        <div class="modal-box-container" > 
+                            <div class="modal-box">
+                                <div class="modal-content" width="70%" height="70%" style="display: flex;flex-direction: column;">
+                                    <div class="close-button-container" style="flex-grow: 1;">
+                                        <div class="close-button" onclick="closeModal(document.getElementsByClassName('modal-box-container')[0])">&times;</div>
+                                    </div>
+                                    <div class="camera-area">
+                                        <video id="webcam" autoplay></video>
+                                    </div>
+                                    <div class="capture-options">
+                                        <div class="options" id="capture-image" style="margin: 7px" >Capt</div>
+                                        <div class="options" id="start-video" style="margin: 7px" >StartVid</div>
+                                        <div class="options" id="stop-video" style="margin: 7px" >StopVid</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="options" id="file" onclick="clickedFileButton()">F</div>
+
+                        <!-- THE MODAL BOX FOR CAMERA-->
+                        <div class="modal-box-container"> 
+                            <div class="modal-box">
+                                <div class="modal-content">
+                                    <div class="close-button-container">
+                                        <div class="close-button" onclick="closeModal(document.getElementsByClassName('modal-box-container')[1])">&times;</div>
+                                    </div>
+                                    <div id="modal-main-content">
+                                        <div id="draggable">
+                                            <div id="file-input-container">
+                                                <label for="file-input" id="file-input-label">Upload File</label>
+                                                <input type="file" name="file" id="file-input" class="show" onchange="uploadedFile(this.files)">
+                                                <p>Or</p>
+                                                <p>Drag file Here</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" onclick="sent()">send</button>
+            </div>
+        </div>
+
+        <div class="rightSection">
+
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="chat.js"></script>
+
+</body>
+
+</html>
