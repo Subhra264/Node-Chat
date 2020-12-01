@@ -4,7 +4,7 @@ const app = express();
 const server = http.createServer(app);
 const io = require('socket.io')(server);
 
-const PORT = process.env.port || 8000;
+const PORT = process.env.PORT || 8000;
 
 //contains the users information
 const users = {};
