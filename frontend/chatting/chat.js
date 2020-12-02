@@ -169,11 +169,11 @@ function clickedCamera(){
             createImgFromURL(imgURL);
 
             // Stop the stream
-            stream.getTracks().forEach((track) => {
-                track.stop();
-            });
+            // stream.getTracks().forEach((track) => {
+            //     track.stop();
+            // });
 
-            
+            stopStream(stream);
         };
 
         //Get the start video button
@@ -220,6 +220,12 @@ function clickedCamera(){
             
         };
 
+        let closeButton = document.getElementById("camera-close-button");
+        closeButton.onclick = () => {
+            stopStream(stream);
+            closeModal(webCamModal);
+        }
+
         function stopRecording() {
             
             //What to do when the mediaRecorder stops
@@ -246,9 +252,11 @@ function clickedCamera(){
                 // prevName = "";
                 
                 // Stop the stream
-                stream.getTracks().forEach((track) => {
-                    track.stop();
-                });
+                // stream.getTracks().forEach((track) => {
+                //     track.stop();
+                // });
+                stopStream(stream);
+
             }
         }
 
@@ -256,6 +264,13 @@ function clickedCamera(){
     .catch((err) => {
         let cameraArea = document.getElementsByClassName("camera-area")[0];
         cameraArea.innerHTML = "Sorry! Something went wrong";
+    });
+}
+
+// stop the given stream
+function stopStream(stream){
+    stream.getTracks().forEach((track) => {
+        track.stop();
     });
 }
 

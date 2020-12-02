@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="chat.css">
-
-    <title>Tessanger</title>
+    <script src="https://kit.fontawesome.com/a8dc18b367.js" crossorigin="anonymous"></script>
+    <title>NodeChat</title>
 </head>
 
 <body>
     <nav>
         <div class="left-nav">
-            <a href="#" class="logo">Titchat</a>
+            <a href="#" class="logo">NodeChat</a>
             <a href="#">Account</a>
             <a href="#">Search</a>
             <a href="#">Settings</a>
@@ -61,36 +61,36 @@
             <div class="messageOptions">
                 <textarea name="message" id="message" placeholder="Type here..." data-emojiable="true"></textarea>
                 <div class="options-container">
-                    <div class="container" onclick="clickedIcon()">I</div>
+                    <div class="container" onclick="clickedIcon()"><i class="fas fa-ellipsis-v"></i></div>
                     <div class="opt-cont-dropdown show">
                         <div class="voice-message-options">
-                            <div class="options" id="voice" onclick="sendVoiceMessage()">V</div>
-                            <div class="options show" id="stop-voice">P</div>
-                            <div class="options show" id="delete-voice">D</div>
+                            <div class="options" id="voice" onclick="sendVoiceMessage()"><i class="fas fa-microphone"></i></div>
+                            <div class="options show" id="stop-voice"><i class="far fa-paper-plane"></i></div>
+                            <div class="options show" id="delete-voice"><i class="fas fa-trash"></i></div>
                         </div>
 
-                        <div class="options" id="camera" onclick="clickedCamera()">C</div>
+                        <div class="options" id="camera" onclick="clickedCamera()"><i class="fas fa-camera"></i></div>
 
                         <!-- THE MODAL BOX -->
                         <div class="modal-box-container" > 
                             <div class="modal-box">
                                 <div class="modal-content" width="70%" height="70%" style="display: flex;flex-direction: column;">
                                     <div class="close-button-container" style="flex-grow: 1;">
-                                        <div class="close-button" onclick="closeModal(document.getElementsByClassName('modal-box-container')[0])">&times;</div>
+                                        <div class="close-button" id="camera-close-button">&times;</div>
                                     </div>
                                     <div class="camera-area">
                                         <video id="webcam" autoplay></video>
                                     </div>
                                     <div class="capture-options">
-                                        <div class="options" id="capture-image" style="margin: 7px" >Capt</div>
-                                        <div class="options" id="start-video" style="margin: 7px" >StartVid</div>
-                                        <div class="options" id="stop-video" style="margin: 7px" >StopVid</div>
+                                        <div class="options" id="capture-image" style="margin: 7px" ><i class="fas fa-camera-retro"></i></div>
+                                        <div class="options" id="start-video" style="margin: 7px" ><i class="fas fa-video"></i></div>
+                                        <div class="options" id="stop-video" style="margin: 7px" ><i class="far fa-stop-circle"></i></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="options" id="file" onclick="clickedFileButton()">F</div>
+                        <div class="options" id="file" onclick="clickedFileButton()"><i class="fas fa-paperclip"></i></div>
 
                         <!-- THE MODAL BOX FOR CAMERA-->
                         <div class="modal-box-container"> 
@@ -114,7 +114,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" onclick="sent()">send</button>
+                <button type="submit" onclick="sent()"><i class="far fa-paper-plane"></i></button>
             </div>
         </div>
 
