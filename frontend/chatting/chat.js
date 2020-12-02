@@ -264,6 +264,11 @@ function clickedCamera(){
     .catch((err) => {
         let cameraArea = document.getElementsByClassName("camera-area")[0];
         cameraArea.innerHTML = "Sorry! Something went wrong";
+        let closeButton = document.getElementById("camera-close-button");
+        closeButton.onclick = () => {
+            closeModal(webCamModal);
+        }
+
     });
 }
 
