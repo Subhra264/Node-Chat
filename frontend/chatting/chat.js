@@ -1,14 +1,14 @@
 const socket = io();
+// import {container , usersContainer, file, camera, voice, stopVoice, deleteVoice, modalBox} from "./utilities/constants"; 
 const container = document.getElementsByClassName("message-container")[0];
 const usersContainer = document.getElementsByClassName("rightSection")[0];
 
-let file = document.getElementById("file");
-let camera = document.getElementById("camera");
-let voice = document.getElementById("voice");
-let stopVoice = document.getElementById("stop-voice");
-let deleteVoice = document.getElementById("delete-voice");
-let modalBox = document.getElementsByClassName("modal-box-container")[1];
-
+const file = document.getElementById("file");
+const camera = document.getElementById("camera");
+const voice = document.getElementById("voice");
+const stopVoice = document.getElementById("stop-voice");
+const deleteVoice = document.getElementById("delete-voice");
+const modalBox = document.getElementsByClassName("modal-box-container")[1];
 
 
 console.log(socket);
@@ -78,7 +78,7 @@ socket.on("userJoined" , (name) => {
 });
 
 //function for sending text message
-function sent(){
+function send(){
     let value = document.getElementById("message").value;
     if(value == ""){
         document.getElementById("message").placeholder = "Please type something...";
