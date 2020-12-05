@@ -94,8 +94,8 @@ a{
 .channels{
     padding: 13px;
     margin: 11px;
-    box-shadow: 10px 4px 8px 4px rgb(170, 170, 170),
-                -10px -4px 8px #eef5ff;
+    box-shadow: 10px 4px 8px 4px rgb(170, 170, 170), 
+                -5px -4px 8px #eef5ff;
 }
 
 .main{
@@ -105,10 +105,10 @@ a{
     left: 25%;
     /* margin: auto; */
     /* border-radius: 8px; */
-    background-color: white;
+    background-color: #f1d8ee;
     padding: 1.5rem;
-    border-right: 1px solid rgb(130, 135, 209);
 }
+
 
 .main .message-container{
     height: 87%;
@@ -129,7 +129,11 @@ a{
     width: fit-content;
     max-width: 40%;
     margin: 2px 0;
+    background-color: #f1d8ee;
     outline: none;
+    padding: 6px;
+    box-shadow: 5px 6px 8px #bcbcbc,
+                -5px -6px 8px #dff8ff;
 }
 
 .leftContent{
@@ -206,11 +210,11 @@ a{
     width: fit-content;
     max-width: 25%;
     clear: both;
-    border-radius: 10px;
-    background-color: rgb(238, 230, 230);
+    background-color: #f1d2de;
     margin: 0.7rem auto;
     padding: 0.4rem;
     text-align: center;
+    box-shadow: 10px 4px 8px #bccccc, -10px -4px 8px #f5f1ff;
     word-wrap: break-word;
 }
 
@@ -460,9 +464,12 @@ a{
     height: 100%;
     position: absolute;
     left: 75%;
-    z-index : 0;
+    padding: 11px;
+    z-index: 0;
+    background-color: rgb(212, 220, 221);
 }
 
 .perticipants{
-    padding: 2em;
+    padding: 19px;
+    margin: 12px auto;
 }
