@@ -1,10 +1,32 @@
-const http = require('http');
-const express = require('express');
-const app = express();
-const server = http.createServer(app);
-const io = require('socket.io')(server);
+const {MONGOURI} = require("./config/keys");
+const mongoose = require("mongoose");
+const router = require('./routes');
+const {io, express, app, server} = require('./utils');
 
 const PORT = process.env.PORT || 8000;
+
+//Middlewares
+app.use(express.json());
+app.set('views', './frontend/views');
+app.set('view engine', 'ejs');
+app.use(express.static('./frontend/'));
+app.use(router);
+
+//Connect to the Mongodb
+mongoose.connect(MONGOURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+
+//Check if the connection has been established
+mongoose.connection.on("connected", () => {
+    console.log("Connected to Mongodb atlas!");
+});
+
+//But if an error is there 
+mongoose.connection.on("error", (err) => {
+    console.log("Error connecting mongodb : " + err);
+});
 
 //contains the users information
 const users = {};
@@ -31,17 +53,19 @@ io.on("connection" , (socket) => {
 
     //On sending an image
     socket.on("sendImage", (data) => {
+        console.log("The image data : " + data.data);
         socket.broadcast.emit("receivedImage", {name: users[socket.id], data: data.data });
     });
 
     //On sending a video
     socket.on("sentVideo", (data) => {
+        console.log("The video: " + data);
         socket.broadcast.emit("receivedVideo", {name: users[socket.id], data: data});
     });
 
     //on sending a voice message
     socket.on("sentVoiceMessage" , (chunks) => {
-        // console.log(blob);
+        console.log("Voice message chunks: " + chunks);
         socket.broadcast.emit("receivedVoice" , chunks , users[socket.id]);
     });
 
@@ -53,19 +77,44 @@ io.on("connection" , (socket) => {
     });
 });
 
-// app.use(express.static('./frontend/home'));
-app.use(express.static('./frontend/chatting'));
+const data = {
+    user: {
+        name: "Subhendu Adhikari",
+        _id: "5ff15d79e616970f4ce031fb"
+    },
+    groups: [
+        "MyFirstGroup",
+        "MySecondGroup",
+        "MyThirdGroup"
+    ],
+    friends: [],
+    textChannels: [
+        "welcome"
+    ],
+    currentGroup: "MyThirdGroup",
+    users: [
+        {
+            _id: "5ff15dd3e616970f4ce0320b",
+            name: "Subhendu Adhikari",
+            reference: "5ff15d79e616970f4ce031fb"
+        }
+    ],
+    messages: [
+        {
+            sender: {
+                name: "Subhendu Adhikari",
+                reference: "5ff15d79e616970f4ce031fb"
+            },
+            _id: "5ff168dfe0ff013230061c43",
+            message: "Hello world!"
+        }
+    ]
+}
+
 app.get('/', (req , res) => {
-    res.sendFile(__dirname + '/frontend/chatting/chat.html');
+    res.render('chat', {data});
 });
 
-
-
-// app.use(express.json());
-// app.post('/chat' , (req ,res) => {
-//     console.log(req);
-//     res.sendFile(__dirname + '/frontend/chatting/chat.html');
-// });
 server.listen(PORT , () => {
     console.log("Express server is listening on port number 8000...");
 });

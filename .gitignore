@@ -1,4 +1,3 @@
 node_modules/
-frontend/chatting/tessanger-logo.png
-frontend/chatting/messenger-tone.mp3
-frontend/chatting/utilities/
+frontend/mediaFiles/
+config/

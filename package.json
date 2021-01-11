@@ -4,7 +4,11 @@
   "description": "This is a Server app",
   "main": "app.js",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "ejs": "^3.1.5",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.6",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {},
