@@ -79,7 +79,7 @@ io.on("connection" , (socket) => {
 
 const data = {
     user: {
-        name: "Subhendu Adhikari",
+        name: "John Doe",
         _id: "5ff15d79e616970f4ce031fb"
     },
     groups: [
@@ -95,14 +95,14 @@ const data = {
     users: [
         {
             _id: "5ff15dd3e616970f4ce0320b",
-            name: "Subhendu Adhikari",
+            name: "John Doe",
             reference: "5ff15d79e616970f4ce031fb"
         }
     ],
     messages: [
         {
             sender: {
-                name: "Subhendu Adhikari",
+                name: "John Doe",
                 reference: "5ff15d79e616970f4ce031fb"
             },
             _id: "5ff168dfe0ff013230061c43",
