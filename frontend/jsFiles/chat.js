@@ -3,9 +3,7 @@ const alreadyConnected = sessionStorage.getItem('connected');
 
 // const socket = io();
 
-const socket = io(pathName, {
-    alreadyConnected
-});
+const socket = io(pathName);
 // import {container , usersContainer, file, camera, voice, stopVoice, deleteVoice, modalBox} from "./utilities/constants"; 
 const container = document.getElementsByClassName("message-container")[0];
 const usersContainer = document.getElementsByClassName("rightSection")[0];
@@ -40,7 +38,17 @@ function append(input , classname){
 }
 
 //Notify that this User has joined the chat
-socket.emit("join" , name);
+socket.emit("join" , {
+    name,
+    _id: userId,
+    currentGroup,
+    alreadyConnected
+});
+
+//store the token in the session storage
+socket.on('token', (connection) => {
+    sessionStorage.setItem('connected', connection.connected);
+});
 
 //get all the users to show the user
 socket.on('usersAvailable', (users) =>{

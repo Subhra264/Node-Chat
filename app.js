@@ -34,6 +34,7 @@ const users = {};
 //listen for connections
 io.on("connection" , (socket) => {
     console.log("A user connected!!!");
+    console.log(socket);
     socket.on("join" , (name) => {
         users[socket.id] = name;
         io.emit('usersAvailable', users);
@@ -53,19 +54,19 @@ io.on("connection" , (socket) => {
 
     //On sending an image
     socket.on("sendImage", (data) => {
-        console.log("The image data : " + data.data);
+        // console.log("The image data : " + data.data);
         socket.broadcast.emit("receivedImage", {name: users[socket.id], data: data.data });
     });
 
     //On sending a video
     socket.on("sentVideo", (data) => {
-        console.log("The video: " + data);
+        // console.log("The video: " + data);
         socket.broadcast.emit("receivedVideo", {name: users[socket.id], data: data});
     });
 
     //on sending a voice message
     socket.on("sentVoiceMessage" , (chunks) => {
-        console.log("Voice message chunks: " + chunks);
+        // console.log("Voice message chunks: " + chunks);
         socket.broadcast.emit("receivedVoice" , chunks , users[socket.id]);
     });
 
