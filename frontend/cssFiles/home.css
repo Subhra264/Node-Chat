@@ -20,18 +20,6 @@ body{
 .main h1{
     text-align: center;
 }
-.main input{
-    border: none;
-    border-bottom: 1px solid black;
-    margin: 0.3rem;
-    display: inline-block;
-    width: 20rem;
-
-}
-.main label{
-    margin: 0.3rem;
-    display: inline-block;
-}
 
 #submit{
     background-color: blue;
