@@ -1,0 +1,477 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html , body{
+    margin: 0;
+    background-color: #f8f8f8;
+    height: 100vh;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+nav{
+    display: flex;
+    background-color: rgba(247, 244, 244, 0.918);
+    
+}
+/* .logo{
+    font-size: 20px;
+} */
+
+a{
+    text-decoration: none;
+    color: black;
+}
+.left-nav{
+    flex-grow: 6;
+    
+}
+
+.left-nav a{
+    padding: 10px;
+    display: inline-block;
+}
+.left-nav a:hover{
+    background-color: rgb(156, 154, 154);
+} 
+
+.right-nav{
+    flex-grow: 1;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+
+}
+
+.right-nav:hover{
+    background-color: rgb(156, 154, 154);
+}
+
+.appContainer{
+    /* display: flex; */
+    position: fixed;
+    top: 39px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.add-group{
+    width: 5%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    background-color: #f1d8ee;
+    text-align: center;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+/* .group-container{
+    width: 85%;
+    margin: auto;
+} */
+.add-group a{
+    display: inline-block;
+    text-align: center;
+    padding: 25%;
+    margin: 4px auto;
+    border-radius: 50% 50%;
+    background-color: #f1d8ee;
+    box-shadow: 4px 4px 8px rgb(177, 175, 175),
+                -4px -4px 8px #fff;
+    color: black;
+}
+
+.group-options{
+    width: 20%;
+    height: 100%;
+    position: absolute;
+    padding: 10px;
+    left: 5%;
+    background-color:  rgb(196, 196, 199);
+}
+.channels{
+    padding: 13px;
+    margin: 11px;
+    box-shadow: 10px 4px 8px 4px rgb(170, 170, 170), 
+                -5px -4px 8px #eef5ff;
+}
+
+.main{
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    left: 25%;
+    /* margin: auto; */
+    /* border-radius: 8px; */
+    background-color: #f1d8ee;
+    padding: 1.5rem;
+}
+
+
+.main .message-container{
+    height: 87%;
+    padding: 0.5rem;
+    overflow-y: auto;
+    margin-bottom: 0.4rem;
+}
+.message-container::-webkit-scrollbar{
+    width: 3px;
+}
+.message-container::-webkit-scrollbar-thumb{
+    background-color: #888;
+}
+
+.left{
+    float: left;
+    clear: both;
+    width: fit-content;
+    max-width: 40%;
+    margin: 2px 0;
+    background-color: #f1d8ee;
+    outline: none;
+    padding: 6px;
+    box-shadow: 5px 6px 8px #bcbcbc,
+                -5px -6px 8px #dff8ff;
+}
+
+.leftContent{
+    padding: 0.5rem;
+    background-color: #f1f1f1;
+    color: black;
+    border-radius: 6px;
+    width: 100%;
+    word-wrap: break-word;
+}
+
+.left-image-container{
+    clear: both;
+    padding: 6px;
+    background-color: #f1f1f1;
+    margin: 2px 0;
+}
+
+.left-image{
+    width: 260px;
+    height: auto;
+}
+
+.left-image-container::after{
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.right{
+    float: right;
+    clear: both;
+    width: fit-content;
+    max-width: 35%;
+    padding: 0.5rem;
+    background-color: #21f6ce;
+    color: #3a3535;
+    box-shadow: 2px 3px 6px 1px #b8b8b8, -2px -3px 9px #ffffff;
+    /* border-radius: 9px; */
+    /* border-radius: 50%; */
+    margin: 2px 0;
+    word-wrap: break-word;
+}
+
+.right-image-container{
+    float: right;
+    clear: both;
+    padding: 6px;
+    background-color: cornflowerblue;
+    margin: 2px 0;
+}
+
+.right-image{
+    width: 260px;
+    height: auto;
+}
+
+
+
+.right-image-container::after{
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.file-type-displayer{
+    height: 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid cornflowerblue;
+}
+
+.notification{
+    width: fit-content;
+    max-width: 25%;
+    clear: both;
+    background-color: #f1d2de;
+    margin: 0.7rem auto;
+    padding: 0.4rem;
+    text-align: center;
+    box-shadow: 10px 4px 8px #bccccc, -10px -4px 8px #f5f1ff;
+    word-wrap: break-word;
+}
+
+.audio{
+    display: block;
+    width: 35%;
+    min-width: 260px;
+    margin: 2px;
+    outline: none;
+}
+
+.audio-right{
+    float: right;
+    clear: both;
+}
+
+.audio-left{
+    float: left;
+    clear: both;
+}
+
+
+.messageOptions{
+    height: 13%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+#message{
+    flex-grow: 6;
+    border-radius: 4px;
+    padding: 0.3rem;
+    display: inline-block;
+    line-height: 20px;
+    border: none;
+    background-color: rgb(218 209 209);
+    height: 85%;
+    /* max-height: 89%; */
+    box-shadow: 4px 3px 5px #999999, -2px -2px 3px #ffffff;
+    margin-right: 0.8rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    outline: none;
+    resize: none;
+}
+
+#message::-webkit-scrollbar{
+    width: 4px;
+}
+#message::-webkit-scrollbar-thumb{
+    background-color: #888;
+}
+
+.options-container{
+    position: relative;
+    margin: 0 0.2rem;
+    background-color: rgb(208, 222, 222);
+    box-shadow: 4px 3px 5px #999999, -2px -3px 4px #fff;
+}
+
+.container{
+    padding: 1rem;
+}
+
+.opt-cont-dropdown{
+    position: absolute;
+    bottom: 90%;
+    width: 100%;
+}
+
+.show{
+    display: none;;
+}
+
+.options{
+    background-color: rgb(208, 222, 222);
+    color: black;
+    box-shadow: 4px 3px 3px #999999, -2px -2px 3px #fff;
+    padding: 0.4rem;
+    text-align: center;
+    cursor: pointer;
+}
+
+.voice-message-options{
+    position: relative;
+}
+
+#stop-voice{
+    position: absolute;
+    right: 100%;
+    bottom: 0;
+    width: 100%;
+}
+
+#delete-voice{
+    position: absolute;
+    left: 100%;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Style for modal box container */
+.modal-box-container{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 500;
+}
+
+
+/* Styles for modal box */
+.modal-box{
+    height: 100%;
+    width: 100%;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    background-color: #00000077;
+    /* z-index: 100; */
+}
+
+/*style for modal content */
+.modal-content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border-radius: 3px;
+    width: 70%;
+}
+
+/* Style for close button container */
+.close-button-container{
+    padding: 4px;
+    border-bottom: aliceblue;
+    /* height: 1.8rem; */
+}
+
+/* style for the close button */
+.close-button{
+    float: right;
+    padding: 3px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: slategray;
+}
+
+#close-button::hover{
+    color: yellowgreen;
+}
+
+.close-button-container::after{
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* style for the main modal-box content */
+#modal-main-content{
+    overflow: auto;
+    height: 60%;
+    padding: 4px 8px 12px;
+}
+
+/* style for the draggble content */
+#draggable{
+    height: 100%;
+    width: 100%;
+    border: 2px dashed navy;
+    background-color: mediumorchid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* style for the file input container */
+#file-input-container{
+    text-align: center;
+    padding: 3px;
+    line-height: 1.5rem;
+}
+
+#file-input-container > p{
+    color: white;
+
+}
+
+#file-input-label{
+    display: inline-block;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 3px;
+    background-color: white;
+    margin-bottom: 9px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #333333;
+    cursor: pointer;
+}
+
+.camera-area{
+    flex-grow: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.camera-area > video{
+    height: auto;
+    width: auto;
+}
+
+.capture-options{
+    padding: 3px;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.messageOptions > button{
+    flex-grow: 2;
+    max-width: 85px;
+    display: inline-block;
+    background-color: rgb(208 222 222);
+    margin: 5px;
+    padding: 0.2rem;
+    border: none;
+    outline: none;
+    box-shadow: 4px 3px 5px #999999,
+                -2px -2px 3px #fff;
+    height: 35px;
+    font-size: 1.1rem;
+    color: black;
+}
+
+.rightSection{
+    width: 25%;
+    height: 100%;
+    position: absolute;
+    left: 75%;
+    padding: 11px;
+    z-index: 0;
+    background-color: rgb(212, 220, 221);
+}
+
+.perticipants{
+    padding: 19px;
+    margin: 12px auto;
+    box-shadow: 4px 3px 5px #999999, -3px -2px 5px #ffffff;
+}
