@@ -179,6 +179,7 @@ router.get("/:groupName/voiceChannel/:channelName", auth, (req, res) => {
         return res.status(402).json({ error: "Invalid params!" });
     }
 
+    //incomplete
 
     res.json({user});
 });
@@ -304,7 +305,7 @@ router.put('/new-message', auth, (req,res ) => {
         }}
     }, (err, result) => {
         if(err) {
-            return res.status(422).json({err: 'Oops! something went wrong!'});
+            return res.status(422).json({error: 'Oops! something went wrong!'});
         }
 
         res.json({success: "Messages saved successfully!"});

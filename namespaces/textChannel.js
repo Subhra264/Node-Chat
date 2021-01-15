@@ -3,7 +3,7 @@ const {io} = require('../utils');
 
 module.exports = function (){
 
-    
+
     const textChannels = io.of(/^\/(\w+)\/textchannel\/(\w+)$/);
 
     const users = {};
@@ -39,6 +39,29 @@ module.exports = function (){
         socket.on("sendMessage" , (message) => {
             socket.broadcast.emit("receiveMessage" , 
                                 {name : users[userId].name, message});
+            fetch('/new-message', {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    message,
+                    channelId: users[userId].currentTextChannel,
+                    sentBy: {
+                        name: users[userId].name,
+                        _id: userId
+                    }
+                }).then(response => {
+                    return response.json();
+                }).then(result => {
+                    if(result.error){
+                        console.log(result.error);
+                    }
+                    else{
+                        console.log(result.success);
+                    }
+                })
+            })
             
         });
 
