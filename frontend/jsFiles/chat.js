@@ -1,5 +1,6 @@
 const pathName = location.pathname;
-const alreadyConnected = sessionStorage.getItem('connected');
+const currentChannel = sessionStorage.getItem('connected');
+const alreadyConnected = currentChannel === currentChannelId;
 
 // const socket = io();
 
@@ -38,15 +39,18 @@ function append(input , classname){
 }
 
 //Notify that this User has joined the chat
+
 socket.emit("join" , {
     name,
     _id: userId,
     currentGroup,
+    currentChannelId,
     alreadyConnected
 });
 
 //store the token in the session storage
 socket.on('token', (connection) => {
+    console.log("Got the token!");
     sessionStorage.setItem('connected', connection.connected);
 });
 

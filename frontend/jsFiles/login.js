@@ -1,12 +1,16 @@
 const email = document.getElementById('email');
 const password = document.getElementById('password');
+const submitButton = document.getElementById('submit');
 
-const submitForm = (e) => {
+submitButton.addEventListener('click', (e) => {
     e.preventDefault();
     console.log('submitting the form!');
 
     fetch('/signin', {
         method: 'POST',
+        headers: {
+            "Content-Type": 'application/json'
+        },
         body: JSON.stringify({
             email: email.value,
             password: password.value
@@ -24,4 +28,5 @@ const submitForm = (e) => {
     }).catch(err => {
         console.log(err);
     });
-}
+})
+

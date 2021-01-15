@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../cssFiles/chat.css">
+    <link rel="stylesheet" href="/frontend/cssFiles/chat.css">
     <script src="https://kit.fontawesome.com/a8dc18b367.js" crossorigin="anonymous"></script>
     <title>NodeChat</title>
 </head>
@@ -15,6 +15,7 @@
             <a href="#" class="logo">NodeChat</a>
             <a href="#">Account</a>
             <a href="#">Search</a>
+            <a href='/help'>Help</a>
             <a href="#">Settings</a>
         </div>
         <div class="right-nav">
@@ -26,7 +27,7 @@
         <div class="add-group">
             <!-- <div class="group-container"> -->
             <% data.groups.forEach( group => { %>
-                <a href="<%= group %>/textchannel/welcome"><%= group %></a>
+                <a href="/<%= group %>/textchannel/welcome"><%= group %></a>
             <% }); %>
             <div id='add-group'>+</div>
             <!-- </div> -->
@@ -35,7 +36,7 @@
         <div class="group-options">
             <% data.textChannels.forEach( textChannel => { %>
                 <div class='channels'>
-                    <a href='<%= data.currentGroup %>/textchannel/<%= textChannel %>' ><%= textChannel %></a>
+                    <a href='/<%= data.currentGroup %>/textchannel/<%= textChannel %>' ><%= textChannel %></a>
                 </div>
             <% }); %>
             <!-- <div class="channels">
@@ -156,8 +157,9 @@
         let userId = "<%= data.user._id %>";
         let name = '<%= data.user.name %>';
         let currentGroup = '<%= data.currentGroup %>';
+        let currentChannelId = '<%= data.currentTextChannel %>';
     </script>
-    <script src="../jsFiles/chat.js"></script>
+    <script src="/frontend/jsFiles/chat.js"></script>
 
 </body>
 

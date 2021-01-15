@@ -3,6 +3,9 @@ const groupName = document.getElementById('groupName');
 const createGroup = () => {
     fetch('/new-group', {
         method: 'PUT',
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify({
             name: groupName.value
         })

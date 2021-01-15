@@ -15,15 +15,16 @@ const { io } = require("../utils");
 //     res.sendFile(__dirname + "/frontend/home/home.html");
 // });
 
-app.get('/help', auth, (req, res) => {
+
+router.get('/help', auth, (req, res) => {
     res.render('help');
 });
+
 
 //POST method for sign up
 router.post("/signup", (req, res) => {
     //Get the User name, email and password
     const { name, email, password } = req.body;
-
     //Check if name, password and email are given 
     if (!name || !email || !password) {
         return res.json({ "error": "Please fill all the details!" });
@@ -45,7 +46,8 @@ router.post("/signup", (req, res) => {
 
                     //Save the User
                     user.save().then((doc) => {
-                        return res.json(doc);
+                        console.log('Saved doc!');
+                        return res.json({success: 'Signed up successfully!'});
                     }).catch((err) => {
                         return res.status(422).json({ "error": err });
                     });
@@ -149,7 +151,7 @@ router.get("/:groupName/textchannel/:channelName", auth, (req, res) => {
             return res.status(404).json({error : 'No such channel exists in your profile!'});
         }
 
-        // data.currentTextChannel = channelId;
+        data.currentTextChannel = channelId;
 
 
         TextChannel.findById(channelId, (err, result) => {
@@ -163,7 +165,7 @@ router.get("/:groupName/textchannel/:channelName", auth, (req, res) => {
             
 
             // res.json({data});
-            res.render("home", {data});
+            res.render("chat", {data});
         });
     });
 

@@ -6,7 +6,8 @@ const users = {};
 
 textChannels.on('connection', (socket) => {
     const channel = socket.nsp;
-    console.log(socket.io);
+    console.log(socket);
+    console.log(channel);
 
     let userId = null;
 
@@ -17,10 +18,11 @@ textChannels.on('connection', (socket) => {
             users[userDetails._id] = {
                 socketId: socket.id,
                 name: userDetails.name,
+                currentTextChannel: userDetails.currentChannelId,
                 currentGroup: userDetails.currentGroup
             }
             userId = userDetails._id;
-            channel.to(socket.id).emit("token", {connected: true});
+            channel.to(socket.id).emit("token", {connected: userDetails.currentChannelId});
         }else{
             //If the user is already connected 
             //then disconnect the user
