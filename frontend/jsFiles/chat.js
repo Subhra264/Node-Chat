@@ -2,7 +2,18 @@ const pathName = location.pathname;
 const currentChannel = sessionStorage.getItem('connected');
 const alreadyConnected = currentChannel === currentChannelId;
 
-// const socket = io();
+//code to share session storage between two tabs or windows
+localStorage.setItem('getSessionStorage', Date.now());
+
+// window.addEventListener('storage', (event) => {
+//     if(event.key === 'getSessionStorage'){
+//         localStorage.setItem('connected', sessionStorage.getItem('connected'));
+//         localStorage.removeItem('connected');
+//     }
+//     if(event.key === 'connected' && !sessionStorage.length ){
+//         sessionStorage.setItem('connected', event.newValue);
+//     }
+// })
 
 const socket = io(pathName);
 // import {container , usersContainer, file, camera, voice, stopVoice, deleteVoice, modalBox} from "./utilities/constants"; 
@@ -38,6 +49,36 @@ function append(input , classname){
     container.appendChild(notice);
 }
 
+//function to save new messages
+const saveNewMessage = (obj) => {
+
+    const {message, channelId, sentBy} = obj;
+
+    fetch('/new-message', {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                message,
+                channelId,
+                sentBy
+            })
+    }).then(response => {
+        return response.json();
+    }).then(result => {
+        if(result.error){
+            console.log(result.error);
+        }
+        else{
+            console.log(result.success);
+        }
+    }).catch(err => {
+        console.log("Error saving new messages!", err);
+    });
+    
+}
+
 //Notify that this User has joined the chat
 
 socket.emit("join" , {
@@ -55,36 +96,36 @@ socket.on('token', (connection) => {
 });
 
 //get all the users to show the user
-socket.on('usersAvailable', (users) =>{
-    let usersArray = Object.keys(users);
-    console.log(usersArray);
-    //Use the usersContainer
-    //Iterate over all the users
-    usersArray.forEach((userId) => {
-        if(userId !== socket.id && !alreadyPresentUsers[userId]){
+// socket.on('usersAvailable', (users) =>{
+//     let usersArray = Object.keys(users);
+//     console.log(usersArray);
+//     //Use the usersContainer
+//     //Iterate over all the users
+//     usersArray.forEach((userId) => {
+//         if(userId !== socket.id && !alreadyPresentUsers[userId]){
 
-            //Creating a div
-            let perticipant = document.createElement('div');
+//             //Creating a div
+//             let perticipant = document.createElement('div');
             
-            //Adding the class 
-            perticipant.classList.add('perticipants');
-            console.log(users[userId]);
-            perticipant.innerHTML = users[userId];
+//             //Adding the class 
+//             perticipant.classList.add('perticipants');
+//             console.log(users[userId]);
+//             perticipant.innerHTML = users[userId];
 
-            //Appending the element to the usersContainer
-            usersContainer.appendChild(perticipant);
+//             //Appending the element to the usersContainer
+//             usersContainer.appendChild(perticipant);
 
-            //Adding the user to the alreadyPresentUser
-            alreadyPresentUsers[userId] = users[userId];
-        }
-    });
-});
+//             //Adding the user to the alreadyPresentUser
+//             alreadyPresentUsers[userId] = users[userId];
+//         }
+//     });
+// });
 
-//When an User joins the chat
-socket.on("userJoined" , (name) => {
-    append(name + " joined the chat" , "notification");
-    scroll();
-});
+// //When an User joins the chat
+// socket.on("userJoined" , (name) => {
+//     append(name + " joined the chat" , "notification");
+//     scroll();
+// });
 
 //function for sending text message
 function send(){
@@ -94,11 +135,19 @@ function send(){
     }
     else{
         append(value , "right");
-        socket.emit("sendMessage" , value);
         document.getElementById("message").value = "";
+        saveNewMessage({
+            message: value,
+            channelId: currentChannelId,
+            sentBy: {
+                name,
+                _id: userId
+            }
+        });
         scroll();
         prevName = "";
         document.getElementById("message").placeholder = "Type here...";
+        socket.emit("sendMessage" , value);
     }
     // sound.play();
 }
@@ -118,15 +167,20 @@ socket.on("receiveMessage" , (obj) => {
     }
     left.appendChild(leftContent);
     left.classList.add("left");
+    //save the received message
+    saveNewMessage({
+        message: obj.message,
+        channelId: currentChannelId,
+        sentBy: {
+            name: obj.name,
+            _id: obj.userId
+        }
+    });
+
     container.appendChild(left);
     scroll();
     prevName = obj.name;
-    socket.emit('receivedMessage', {
-        name: obj.name,
-        _id: obj.userId,
-        message: obj.message,
-        channelId: currentChannelId
-    });
+    
 });
 
 //On clicking the I icon different options

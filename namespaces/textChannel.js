@@ -28,7 +28,7 @@ module.exports = function (){
                 userId = userDetails._id;
                 channel.to(socket.id).emit("token", {connected: userDetails.currentChannelId});
             }else{
-                //If the user is already connected 
+                //If the user is already connected
                 //then disconnect the user
                 socket.disconnect();
             }
@@ -39,30 +39,7 @@ module.exports = function (){
         socket.on("sendMessage" , (message) => {
             socket.broadcast.emit("receiveMessage" , 
                                 {name : users[userId].name, userId, message});
-            fetch('/new-message', {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    message,
-                    channelId: users[userId].currentTextChannel,
-                    sentBy: {
-                        name: users[userId].name,
-                        _id: userId
-                    }
-                }).then(response => {
-                    return response.json();
-                }).then(result => {
-                    if(result.error){
-                        console.log(result.error);
-                    }
-                    else{
-                        console.log(result.success);
-                    }
-                })
-            })
-            
+                        
         });
 
         //on sending a file
