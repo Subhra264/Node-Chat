@@ -115,13 +115,18 @@ socket.on("receiveMessage" , (obj) => {
     if(prevName != obj.name){
         left.innerText = obj.name;
         left.style.marginTop = 5 + "px";
-        
     }
     left.appendChild(leftContent);
     left.classList.add("left");
     container.appendChild(left);
     scroll();
     prevName = obj.name;
+    socket.emit('receivedMessage', {
+        name: obj.name,
+        _id: obj.userId,
+        message: obj.message,
+        channelId: currentChannelId
+    });
 });
 
 //On clicking the I icon different options

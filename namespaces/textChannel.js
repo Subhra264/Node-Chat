@@ -38,7 +38,7 @@ module.exports = function (){
 
         socket.on("sendMessage" , (message) => {
             socket.broadcast.emit("receiveMessage" , 
-                                {name : users[userId].name, message});
+                                {name : users[userId].name, userId, message});
             fetch('/new-message', {
                 method: "PUT",
                 headers: {
