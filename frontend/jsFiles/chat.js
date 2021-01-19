@@ -5,6 +5,7 @@ const alreadyConnected = currentChannel === currentChannelId;
 //code to share session storage between two tabs or windows
 localStorage.setItem('getSessionStorage', Date.now());
 
+
 // window.addEventListener('storage', (event) => {
 //     if(event.key === 'getSessionStorage'){
 //         localStorage.setItem('connected', sessionStorage.getItem('connected'));
@@ -13,7 +14,7 @@ localStorage.setItem('getSessionStorage', Date.now());
 //     if(event.key === 'connected' && !sessionStorage.length ){
 //         sessionStorage.setItem('connected', event.newValue);
 //     }
-// })
+// });
 
 const socket = io(pathName);
 // import {container , usersContainer, file, camera, voice, stopVoice, deleteVoice, modalBox} from "./utilities/constants"; 

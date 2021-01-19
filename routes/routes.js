@@ -312,6 +312,42 @@ router.put('/new-message', auth, (req,res ) => {
     });
 });
 
+router.get('/join-group/:groupId', auth, (req, res) => {
+    const user = req.user;
+    const {groupId} = req.params;
+
+    if(!groupId){
+        return res.status(404).json({error: "Invalid request!"});
+    }
+
+    Group.findByIdAndUpdate(groupId, {
+        $push: {
+            users: {
+                name: user.name,
+                reference: user._id
+            }
+        }
+    }).then(doc => {
+        User.findByIdAndUpdate(user._id, {
+            $push: {
+                groups: {
+                    name: doc.name,
+                    reference: doc._id
+                }
+            }
+        }).then(doc => {
+            res.redirect(`/${doc.name}/textchannel/${welcome}`);
+            // res.json({success: "Joined group successfully!"});
+        })
+        .catch(err => {
+            return res.status(422).json({error: "Oops! something went wrong!"});
+        });
+    }).catch(err => {
+        return res.status(422).json({error: "Oops! something went wrong!"});
+    })
+
+});
+
 //GET method for help 
 router.get("/help", auth, (req, res) => {
     res.render('help');
