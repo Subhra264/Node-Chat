@@ -86,6 +86,7 @@ socket.emit("join" , {
     name,
     _id: userId,
     currentGroup,
+    currentGroupId,
     currentChannelId,
     alreadyConnected
 });
@@ -127,6 +128,21 @@ socket.on('token', (connection) => {
 //     append(name + " joined the chat" , "notification");
 //     scroll();
 // });
+
+//function to handle click on the invite friends button
+function inviteFriends() {
+    const inviteLinkContainer = document.getElementById('invite-link-container');
+    inviteLinkContainer.style.display = "block";
+    socket.emit('inviteFriends');
+}
+
+socket.on('inviteLink', (link) => {
+    const inviteLinkContainer = document.getElementById('invite-friends-link');
+
+    inviteLinkContainer.innerHTML = `<div>Share the link with your friends: ${location.host}/join-group/${link.token}</div>`;
+});
+
+
 
 //function for sending text message
 function send(){

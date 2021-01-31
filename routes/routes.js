@@ -3,7 +3,7 @@ const User = require("../models/UserModel");
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { SECRET_KEY } = require('../config/keys');
+const { SECRET_KEY, INVITE_GROUP_KEY } = require('../config/keys');
 const auth = require("../middlewares/auth");
 const Group = require("../models/GroupModel");
 const TextChannel = require("../models/TextChannelModel");
@@ -129,6 +129,7 @@ router.get("/:groupName/textchannel/:channelName", auth, (req, res) => {
     }
 
     data.currentGroup = groupName;
+    data.currentGroupId = groupId;
 
     Group.findById(groupId, (err, result) => {
         if(err) {
@@ -320,31 +321,37 @@ router.get('/join-group/:groupId', auth, (req, res) => {
         return res.status(404).json({error: "Invalid request!"});
     }
 
-    Group.findByIdAndUpdate(groupId, {
-        $push: {
-            users: {
-                name: user.name,
-                reference: user._id
-            }
+    jwt.verify(groupId, INVITE_GROUP_KEY, (err, payload)=> {
+        if(err || !payload){
+            return res.status(400).json({"error": "Invalid request!"});
         }
-    }).then(doc => {
-        User.findByIdAndUpdate(user._id, {
+
+        Group.findByIdAndUpdate(payload.groupId, {
             $push: {
-                groups: {
-                    name: doc.name,
-                    reference: doc._id
+                users: {
+                    name: user.name,
+                    reference: user._id
                 }
             }
         }).then(doc => {
-            res.redirect(`/${doc.name}/textchannel/${welcome}`);
-            // res.json({success: "Joined group successfully!"});
-        })
-        .catch(err => {
+            User.findByIdAndUpdate(user._id, {
+                $push: {
+                    groups: {
+                        name: doc.name,
+                        reference: doc._id
+                    }
+                }
+            }).then(doc => {
+                return res.redirect(`/${doc.name}/textchannel/${welcome}`);
+                // res.json({success: "Joined group successfully!"});
+            })
+            .catch(err => {
+                return res.status(422).json({error: "Oops! something went wrong!"});
+            });
+        }).catch(err => {
             return res.status(422).json({error: "Oops! something went wrong!"});
         });
-    }).catch(err => {
-        return res.status(422).json({error: "Oops! something went wrong!"});
-    })
+    });
 
 });
 

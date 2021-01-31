@@ -1,5 +1,6 @@
 const {io} = require('../utils');
-
+const jwt = require('jsonwebtoken');
+const { INVITE_GROUP_KEY } = require('../config/keys');
 
 module.exports = function (){
 
@@ -23,7 +24,8 @@ module.exports = function (){
                     socketId: socket.id,
                     name: userDetails.name,
                     currentTextChannel: userDetails.currentChannelId,
-                    currentGroup: userDetails.currentGroup
+                    currentGroup: userDetails.currentGroup,
+                    currentGroupId: userDetails.currentGroupId
                 }
                 userId = userDetails._id;
                 channel.to(socket.id).emit("token", {connected: userDetails.currentChannelId});
@@ -63,6 +65,13 @@ module.exports = function (){
         socket.on("sentVoiceMessage" , (chunks) => {
             console.log("Voice message chunks: " + chunks);
             socket.broadcast.emit("receivedVoice" , chunks , users[userId].name);
+        });
+
+        socket.on('inviteFriends', () => {
+            const currentGroupId = users[userId].currentGroupId;
+
+            const token = jwt.sign({groupId: currentGroupId}, INVITE_GROUP_KEY);
+            channel.to(socket.id).emit('inviteLink', {token});
         });
 
         socket.on("disconnect" , () => {

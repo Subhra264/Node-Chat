@@ -140,6 +140,9 @@
         </div>
 
         <div class="rightSection">
+            <div class='perticipants' onclick="inviteFriends()">
+                Invite Friends
+            </div>
             <% data.users.forEach( user => { %>
             <div class="perticipants">
                 <a href='/users/<%=user.reference %>'>
@@ -151,12 +154,28 @@
             </div>
             <% }); %>
         </div>
+
+        <!-- THE MODAL BOX -->
+        <div class="modal-box-container" id="invite-link-container"> 
+            <div class="modal-box">
+                <div class="modal-content" width="70%" height="70%" style="display: flex;flex-direction: column;">
+                    <div class="close-button-container" style="flex-grow: 1;">
+                        <div class="close-button" onclick="closeModal(document.getElementById('invite-link-container'))">&times;</div>
+                    </div>
+                    <div id="invite-friends-link">
+                        <!-- invite friends link will appear hear -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script>
         let userId = "<%= data.user._id %>";
         let name = '<%= data.user.name %>';
         let currentGroup = '<%= data.currentGroup %>';
+        let currentGroupId = '<%= data.currentGroupId %>';
         let currentChannelId = '<%= data.currentTextChannel %>';
     </script>
     <script src="/frontend/jsFiles/chat.js"></script>
