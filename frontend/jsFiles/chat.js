@@ -26,7 +26,7 @@ const camera = document.getElementById("camera");
 const voice = document.getElementById("voice");
 const stopVoice = document.getElementById("stop-voice");
 const deleteVoice = document.getElementById("delete-voice");
-const modalBox = document.getElementsByClassName("modal-box-container")[1];
+const modalBox = document.getElementsByClassName("file-uploader");
 
 
 console.log(socket);
@@ -174,6 +174,33 @@ function createChannel(){
     });
 }
 
+//Function to open the modal box to create new groups
+function openGroupCreatorModal(){
+    const newGroupModal = document.getElementById('create-new-group');
+    newGroupModal.style.display = 'block';
+}
+
+//Function to create new groups
+function createNewGroup() {
+    const groupName = document.getElementById('groupNameInput').value;
+    fetch('/new-group', {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            name: groupName
+        })
+    }).then(res => {
+        return res.json();
+    }).then(result => {
+        if(result.error){
+            console.log("Error creating new group ", result.error);
+        }else{
+            location.pathname = `/${groupName}/textchannel/welcome`;
+        }
+    })
+}
 
 //function for sending text message
 function send(){
@@ -246,7 +273,7 @@ function clickedFileButton(){
 
 //What if user clicks the camera button
 function clickedCamera(){
-    let webCamModal = document.getElementsByClassName('modal-box-container')[0];
+    let webCamModal = document.getElementsById('camera-div-container');
     webCamModal.style.display = "block";
 
     //Get the media stream from User device
@@ -552,7 +579,7 @@ function uploadedFile(files){
 
     }
 
-    modalBox.style.display = "none";
+    // modalBox.style.display = "none";
     // append(file.name, "right");
 
     let div = document.createElement("div");

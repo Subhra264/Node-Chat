@@ -29,17 +29,16 @@
             <% data.groups.forEach( group => { %>
                 <a href="/<%= group %>/textchannel/welcome"><%= group %></a>
             <% }); %>
-            <div id='add-group'>+</div>
+            <div id='add-group' onclick="openGroupCreatorModal()">+</div>
             <!-- THE MODAL BOX -->
-            <div class="modal-box-container" id="invite-link-container"> 
+            <div class="modal-box-container" id="create-new-group"> 
                 <div class="modal-box">
                     <div class="modal-content" width="70%" height="70%" style="display: flex;flex-direction: column;">
                         <div class="close-button-container" style="flex-grow: 1;">
-                            <div class="close-button" onclick="closeModal(document.getElementById('invite-link-container'))">&times;</div>
+                            <div class="close-button" onclick="closeModal(document.getElementById('create-new-group'))">&times;</div>
                         </div>
-                        <div id="invite-friends-link">
-                            <!-- invite friends link will appear hear -->
-                        </div>
+                        <input type="text" id="groupNameInput" placeholder="Group name" required />
+                        <button type="submit" onclick="createNewGroup()">Create Group</button>
                     </div>
                 </div>
             </div>
@@ -118,7 +117,7 @@
                         <div class="options" id="camera" onclick="clickedCamera()"><i class="fas fa-camera"></i></div>
 
                         <!-- THE MODAL BOX -->
-                        <div class="modal-box-container" > 
+                        <div class="modal-box-container" id="camera-div-container"> 
                             <div class="modal-box">
                                 <div class="modal-content" width="70%" height="70%" style="display: flex;flex-direction: column;">
                                     <div class="close-button-container" style="flex-grow: 1;">
@@ -139,11 +138,11 @@
                         <div class="options" id="file" onclick="clickedFileButton()"><i class="fas fa-paperclip"></i></div>
 
                         <!-- THE MODAL BOX FOR CAMERA-->
-                        <div class="modal-box-container"> 
+                        <div class="modal-box-container" id="file-uploader"> 
                             <div class="modal-box">
                                 <div class="modal-content">
                                     <div class="close-button-container">
-                                        <div class="close-button" onclick="closeModal(document.getElementsByClassName('modal-box-container')[1])">&times;</div>
+                                        <div class="close-button" onclick="closeModal(document.getElementsById('file-uploader'))">&times;</div>
                                     </div>
                                     <div id="modal-main-content">
                                         <div id="draggable">
