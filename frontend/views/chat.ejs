@@ -30,6 +30,19 @@
                 <a href="/<%= group %>/textchannel/welcome"><%= group %></a>
             <% }); %>
             <div id='add-group'>+</div>
+            <!-- THE MODAL BOX -->
+            <div class="modal-box-container" id="invite-link-container"> 
+                <div class="modal-box">
+                    <div class="modal-content" width="70%" height="70%" style="display: flex;flex-direction: column;">
+                        <div class="close-button-container" style="flex-grow: 1;">
+                            <div class="close-button" onclick="closeModal(document.getElementById('invite-link-container'))">&times;</div>
+                        </div>
+                        <div id="invite-friends-link">
+                            <!-- invite friends link will appear hear -->
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- </div> -->
         </div>
 
@@ -45,8 +58,20 @@
             <div class="channels">
                 Lorem, ipsum dolor.
             </div> -->
-            <div class="channels" id='add-channel'>
+            <div class="channels" id='add-channel' onclick="openNewChannelModal()">
                 +
+            </div>
+            <!-- THE MODAL BOX -->
+            <div class="modal-box-container" id="create-new-channel"> 
+                <div class="modal-box">
+                    <div class="modal-content" width="70%" height="70%" style="display: flex;flex-direction: column;">
+                        <div class="close-button-container" style="flex-grow: 1;">
+                            <div class="close-button" onclick="closeModal(document.getElementById('create-new-channel'))">&times;</div>
+                        </div>
+                        <input type="text" placeholder="Channel name" id='channelNameInput' required/>
+                        <button type="submit" onclick="createChannel()">Create Channel</button>
+                    </div>
+                </div>
             </div>
         </div>
 

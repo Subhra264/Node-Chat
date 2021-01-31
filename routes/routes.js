@@ -256,7 +256,7 @@ router.put("/new-group", auth, (req, res) => {
 //PUT method for creating new channel
 router.put("/create-new-channel", auth, (req, res) => {
     const user = req.user;
-    const {name, parentGroup} = req.body;
+    const {name, parentGroup, parentGroupName} = req.body;
 
     if(!name){
         return res.status(402).json({error : 'Please give a name!'});
@@ -274,17 +274,19 @@ router.put("/create-new-channel", auth, (req, res) => {
         }
 
         Group.findByIdAndUpdate(parentGroup, {
-            $push : {textChannels:  {
-                name: doc.name,
-                reference: doc
-            }}
+            $push : {
+                textChannels:  {
+                    name: doc.name,
+                    reference: doc
+                }
+            }
         }, (err, res) => {
             if(err){
                 return res.status(422).json({error : 'Oops! something went wrong!'});
             }
 
-            res.json({success: 'Text Channel created successfully!'});
-        })
+            res.json({success: "Channel created succesfully!"});
+        });
         
     });
 });

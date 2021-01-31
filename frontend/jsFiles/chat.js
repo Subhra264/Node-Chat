@@ -142,6 +142,37 @@ socket.on('inviteLink', (link) => {
     inviteLinkContainer.innerHTML = `<div>Share the link with your friends: ${location.host}/join-group/${link.token}</div>`;
 });
 
+// Open modal box to create new channels
+function openNewChannelModal() {
+    const channelModal = document.getElementById('create-new-channel');
+    channelModal.style.display = 'block';
+}
+
+//Function to create a new channel
+function createChannel(){
+    const channelName = document.getElementById('channelNameInput').value;
+    
+    fetch('/create-new-channel', {
+        method: "PUT",
+        headers: {
+            "Content-Type" : "application/json"
+        },
+        body: JSON.stringify({
+            name: channelName,
+            parentGroup: currentGroupId
+        })
+    }).then(res => {
+        return res.json();
+    }).then(result => {
+        if(result.error){
+            console.log("Error creating new channel: ", result.error);
+        }else{
+            location.pathname = `/${currentGroup}/textchannel/${channelName}`
+        }
+    }).catch(err => {
+        console.log("Error creating new channel : ", err);
+    });
+}
 
 
 //function for sending text message
