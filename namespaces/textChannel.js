@@ -11,15 +11,15 @@ module.exports = function (){
 
     textChannels.on('connection', (socket) => {
         const channel = socket.nsp;
-        console.log(socket);
-        console.log(channel);
+        // console.log(socket);
+        // console.log(channel);
 
         let userId = null;
 
         //When an User joins the channel
         socket.on('join', (userDetails) => {
             //Check if the user is already connected or not
-            if(!userDetails.alreadyConnected){
+            // if(!userDetails.alreadyConnected){
                 users[userDetails._id] = {
                     socketId: socket.id,
                     name: userDetails.name,
@@ -29,11 +29,12 @@ module.exports = function (){
                 }
                 userId = userDetails._id;
                 channel.to(socket.id).emit("token", {connected: userDetails.currentChannelId});
-            }else{
-                //If the user is already connected
-                //then disconnect the user
-                socket.disconnect();
-            }
+                console.log("Users in this channel ", users[userId]);
+            // }else{
+            //     //If the user is already connected
+            //     //then disconnect the user
+            //     socket.disconnect();
+            // }
         });
 
 
@@ -51,19 +52,16 @@ module.exports = function (){
 
         //On sending an image
         socket.on("sendImage", (data) => {
-            console.log("The image data : " + data.data);
             socket.broadcast.emit("receivedImage", {name: users[userId].name, data: data.data });
         });
 
         //On sending a video
         socket.on("sentVideo", (data) => {
-            console.log("The video: " + data);
             socket.broadcast.emit("receivedVideo", {name: users[userId].name, data: data});
         });
 
         //on sending a voice message
         socket.on("sentVoiceMessage" , (chunks) => {
-            console.log("Voice message chunks: " + chunks);
             socket.broadcast.emit("receivedVoice" , chunks , users[userId].name);
         });
 

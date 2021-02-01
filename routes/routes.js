@@ -106,15 +106,10 @@ router.get("/:groupName/textchannel/:channelName", auth, (req, res) => {
         textChannels: []
     };
 
-    data.user = {
-        name: user.name,
-        _id: user._id
-    };
-
     let groupId = null;
 
     if (!groupName || !channelName) {
-        return res.status(402).json({ error: "Invalid params!" });
+        return res.status(404).json({ error: "Invalid params!" });
     }
     
     user.groups.forEach(element => {
@@ -125,7 +120,7 @@ router.get("/:groupName/textchannel/:channelName", auth, (req, res) => {
     });
 
     if(!groupId){
-        return res.status(402).json({error : 'No such group exists in your profile!'});
+        return res.status(404).json({error : 'No such group exists in your profile!'});
     }
 
     data.currentGroup = groupName;
@@ -161,10 +156,6 @@ router.get("/:groupName/textchannel/:channelName", auth, (req, res) => {
             }
             data.messages = result.textMessages;
 
-            // const namespace = io.of(`/${groupName}/textchannel/${channelName}`);
-            
-            
-
             // res.json({data});
             res.render("chat", {data});
         });
@@ -191,7 +182,7 @@ router.put("/new-group", auth, (req, res) => {
     const {name} = req.body;
 
     if(!name){
-        return res.status(402).json({error : 'Please give a name!'});
+        return res.status(400).json({error : 'Please give a name!'});
     }
     const parentGroupId = new mongoose.Types.ObjectId();
 
@@ -280,7 +271,7 @@ router.put("/create-new-channel", auth, (req, res) => {
                     reference: doc
                 }
             }
-        }, (err, res) => {
+        }, (err, result) => {
             if(err){
                 return res.status(422).json({error : 'Oops! something went wrong!'});
             }

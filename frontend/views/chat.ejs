@@ -88,7 +88,7 @@
                 Lorem ipsum dolor sit amet.
             </div> -->
                 <% data.messages.forEach( message => { %>
-                    <% if(message.sender.reference !== data.user._id){ %>
+                    <% if(JSON.stringify(message.sender.reference) != JSON.stringify(data.user._id)){ %>
                         <div class='left' >
                             <%= message.sender.name %>
                             <div class="leftContent">
@@ -137,12 +137,12 @@
 
                         <div class="options" id="file" onclick="clickedFileButton()"><i class="fas fa-paperclip"></i></div>
 
-                        <!-- THE MODAL BOX FOR CAMERA-->
+                        <!-- THE MODAL BOX FOR FILE UPLOAD-->
                         <div class="modal-box-container" id="file-uploader"> 
                             <div class="modal-box">
                                 <div class="modal-content">
                                     <div class="close-button-container">
-                                        <div class="close-button" onclick="closeModal(document.getElementsById('file-uploader'))">&times;</div>
+                                        <div class="close-button" onclick="closeModal(document.getElementById('file-uploader'))">&times;</div>
                                     </div>
                                     <div id="modal-main-content">
                                         <div id="draggable">
@@ -171,7 +171,7 @@
             <div class="perticipants">
                 <a href='/users/<%=user.reference %>'>
                     <%= user.name %>
-                    <% if(user.reference === data.user._id) { %>
+                    <% if(JSON.stringify(user.reference) == JSON.stringify(data.user._id)) { %>
                         (you)
                     <% } %>
                 </a> 
@@ -196,11 +196,11 @@
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-        let userId = "<%= data.user._id %>";
-        let name = '<%= data.user.name %>';
-        let currentGroup = '<%= data.currentGroup %>';
-        let currentGroupId = '<%= data.currentGroupId %>';
-        let currentChannelId = '<%= data.currentTextChannel %>';
+        const userId = "<%= data.user._id %>";
+        const name = '<%= data.user.name %>';
+        const currentGroup = '<%= data.currentGroup %>';
+        const currentGroupId = '<%= data.currentGroupId %>';
+        const currentChannelId = '<%= data.currentTextChannel %>';
     </script>
     <script src="/frontend/jsFiles/chat.js"></script>
 

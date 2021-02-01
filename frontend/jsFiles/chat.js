@@ -26,7 +26,7 @@ const camera = document.getElementById("camera");
 const voice = document.getElementById("voice");
 const stopVoice = document.getElementById("stop-voice");
 const deleteVoice = document.getElementById("delete-voice");
-const modalBox = document.getElementsByClassName("file-uploader");
+const modalBox = document.getElementById("file-uploader");
 
 
 console.log(socket);
@@ -87,8 +87,8 @@ socket.emit("join" , {
     _id: userId,
     currentGroup,
     currentGroupId,
-    currentChannelId,
-    alreadyConnected
+    currentChannelId
+    // alreadyConnected
 });
 
 //store the token in the session storage
@@ -273,7 +273,7 @@ function clickedFileButton(){
 
 //What if user clicks the camera button
 function clickedCamera(){
-    let webCamModal = document.getElementsById('camera-div-container');
+    let webCamModal = document.getElementById('camera-div-container');
     webCamModal.style.display = "block";
 
     //Get the media stream from User device
