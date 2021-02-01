@@ -29,13 +29,9 @@ const deleteVoice = document.getElementById("delete-voice");
 const modalBox = document.getElementById("file-uploader");
 
 
-console.log(socket);
 console.log("A user connected!!!");
 //contains the current previous username
 let prevName = "";
-
-//Adding the class 
-console.log('My name is ', name);
 
 //function for automatic scrolling
 function scroll(){
@@ -138,7 +134,7 @@ function inviteFriends() {
 
 socket.on('inviteLink', (link) => {
     const inviteLinkContainer = document.getElementById('invite-friends-link');
-
+    
     inviteLinkContainer.innerHTML = `<div>Share the link with your friends: ${location.host}/join-group/${link.token}</div>`;
 });
 
