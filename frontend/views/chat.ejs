@@ -37,8 +37,10 @@
                         <div class="close-button-container" style="flex-grow: 1;">
                             <div class="close-button" onclick="closeModal(document.getElementById('create-new-group'))">&times;</div>
                         </div>
-                        <input type="text" id="groupNameInput" placeholder="Group name" required />
-                        <button type="submit" onclick="createNewGroup()">Create Group</button>
+                        <div class="group-creation-from">
+                            <input type="text" id="groupNameInput" placeholder="Group name" required />
+                            <button type="submit" onclick="createNewGroup()">Create Group</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -186,8 +188,10 @@
                     <div class="close-button-container" style="flex-grow: 1;">
                         <div class="close-button" onclick="closeModal(document.getElementById('invite-link-container'))">&times;</div>
                     </div>
-                    <div id="invite-friends-link">
-                        <!-- invite friends link will appear hear -->
+                    <div class="invite-friends-link-container">
+                        <div id="invite-friends-link">
+                            <!-- invite friends link will appear hear -->
+                        </div>
                     </div>
                 </div>
             </div>

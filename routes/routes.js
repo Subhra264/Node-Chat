@@ -348,6 +348,8 @@ router.get('/join-group/:groupId', auth, (req, res) => {
 
 });
 
+router.get('profile/:username');
+
 //GET method for help 
 router.get("/help", auth, (req, res) => {
     res.render('help');

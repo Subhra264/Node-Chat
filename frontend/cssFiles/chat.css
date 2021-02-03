@@ -91,6 +91,21 @@ a{
     left: 5%;
     background-color:  rgb(196, 196, 199);
 }
+
+.group-creation-form{
+    padding : 1rem;
+    display: flex;
+}
+
+.group-creation-form input{
+    display: inline-block;
+    padding: 4px;
+    border: none;
+    outline: none;
+    box-shadow: 10px 4px 8px 4px rgb(170, 170, 170), 
+                -5px -4px 8px #eef5ff;;
+}
+
 .channels{
     padding: 13px;
     margin: 11px;
@@ -478,4 +493,6 @@ a{
 
 #invite-friends-link{
     overflow-x: auto;
+    padding: 5px;
+    background-color: rgb(201, 163, 163);
 }
