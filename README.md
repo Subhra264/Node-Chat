@@ -1,5 +1,5 @@
 # NodeChat
-This is a chatting application (still under development) built with node.js ejs and socket.io.
+This is a chatting application (still under development) built with node.js ejs and socket.io. Design is based on Neo-morphism.
 
 # Features
 Already implemented features are 
@@ -25,5 +25,7 @@ Already implemented features are
     <li>WebRTC</li>
     <li>Socket.io</li>
 </ul>
+
+<b>Note : </b> Only desktop browsers are supported with the current design, still not responsive for mobile browsers.
 
 You can check the project on <a href='nodechat231.herokuapp.com'> Nodechat </a>
