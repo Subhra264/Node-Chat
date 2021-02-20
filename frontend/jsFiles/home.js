@@ -22,6 +22,9 @@ submitButton.addEventListener('click', (e) => {
         console.log(result);
         if(result.error){
             console.log(result.error);
+            const errorContainer = document.getElementById('error-container');
+            errorContainer.innerText = result.error;
+            errorContainer.style.display = 'block';
         }
         else{
             console.log(result.success);

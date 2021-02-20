@@ -9,34 +9,37 @@
 </head>
 <body>
     <div class="main">
-        <h1>Chatting app</h1>
-        <h2>Sign Up</h2>
-        <form >
-            <div class="row mb-3">
-              <label for="inputEmail3" class="col-sm-2 col-form-label">Name</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id='name' required>
-              </div>
+      <div class="alert alert-danger" role="alert" style="display: none;" id="error-container">
+        <!-- Errors will appear here -->
+      </div>
+      <h1>Chatting app</h1>
+      <h2>Sign Up</h2>
+      <form >
+          <div class="row mb-3">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id='name' required>
             </div>
-            <div class="row mb-3">
-              <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-              <div class="col-sm-10">
-                <input type="email" class="form-control" id="email" required>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-              <div class="col-sm-10">
-                <input type="password" class="form-control" id="password" required>
-              </div>
-            </div>
-            
-            <button type='submit' class="btn btn-primary" id='submit'>Sign in</button>
-          </form>
-          <div>
-            Already have an account??
-            <a href="/log-in">Log In</a>
           </div>
+          <div class="row mb-3">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="email" required>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="password" required>
+            </div>
+          </div>
+          
+          <button type='submit' class="btn btn-primary" id='submit'>Sign in</button>
+        </form>
+        <div>
+          Already have an account??
+          <a href="/log-in">Log In</a>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
