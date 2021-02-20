@@ -6,7 +6,7 @@ const submitButton = document.getElementById('submit');
 submitButton.addEventListener('click', (e) => {
     e.preventDefault();
 
-    fetch('/signup', {
+    fetch('/sign-up', {
         method: 'POST',
         headers: {
             "Content-Type" : "application/json"

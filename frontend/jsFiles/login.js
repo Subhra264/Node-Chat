@@ -6,7 +6,7 @@ submitButton.addEventListener('click', (e) => {
     e.preventDefault();
     console.log('submitting the form!');
 
-    fetch('/signin', {
+    fetch('/log-in', {
         method: 'POST',
         headers: {
             "Content-Type": 'application/json'
