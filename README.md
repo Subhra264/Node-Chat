@@ -24,6 +24,7 @@ Already implemented features are
     <li>EJS</li>
     <li>WebRTC</li>
     <li>Socket.io</li>
+    <li>Bootstrap</li>
 </ul>
 
 <b>Note : </b> Only desktop browsers are supported with the current design, still not responsive for mobile browsers.
