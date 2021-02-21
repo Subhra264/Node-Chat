@@ -13,6 +13,7 @@ app.set('view engine', 'ejs');
 app.use('/frontend', express.static('./frontend/'));
 app.use(router);
 app.use(require('./routes/auth.route'));
+// app.use(require('./routes/group.route'));
 
 //Connect to the Mongodb
 mongoose.connect(MONGOURI, {

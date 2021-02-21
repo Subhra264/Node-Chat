@@ -8,11 +8,11 @@ const userSchema = new Schema({
         type: String
     },
 
-    username:{
-        type: String,
-        unique:true,
-        required: true
-    },
+    // username:{
+    //     type: String,
+    //     unique:true,
+    //     required: true
+    // },
 
     email : {
         required: true,

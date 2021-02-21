@@ -1,24 +1,11 @@
-const express = require("express");
-const User = require("../models/UserModel");
+const mongoose = require('mongoose');
+const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcryptjs');
+const auth = require('../middlewares/auth');
+const Group = require('../models/GroupModel');
+const TextChannel = require('../models/TextChannelModel');
 const jwt = require('jsonwebtoken');
-const { SECRET_KEY, INVITE_GROUP_KEY } = require('../config/keys');
-const auth = require("../middlewares/auth");
-const Group = require("../models/GroupModel");
-const TextChannel = require("../models/TextChannelModel");
-const mongoose = require("mongoose");
-const { io } = require("../utils");
-
-// //GET method for home
-// router.get("/", (req,  res) => {
-//     res.sendFile(__dirname + "/frontend/home/home.html");
-// });
-
-
-router.get('/help', auth, (req, res) => {
-    res.render('help');
-});
+const { INVITE_GROUP_KEY } = require('../config/keys');
 
 //GET method for 
 router.get("/:groupName/textchannel/:channelName", auth, (req, res) => {
@@ -91,12 +78,13 @@ router.get("/:groupName/textchannel/:channelName", auth, (req, res) => {
 
 });
 
+//GET method for voice channels
 router.get("/:groupName/voiceChannel/:channelName", auth, (req, res) => {
     const user = req.user;
     const { groupName, channelName } = req.params;
 
     if (!groupName || !channelName) {
-        return res.status(402).json({ error: "Invalid params!" });
+        return res.status(401).json({ error: "Invalid params!" });
     }
 
     //incomplete
@@ -110,7 +98,7 @@ router.put("/new-group", auth, (req, res) => {
     const {name} = req.body;
 
     if(!name){
-        return res.status(400).json({error : 'Please give a name!'});
+        return res.status(401).json({error : 'Please give a name!'});
     }
     const parentGroupId = new mongoose.Types.ObjectId();
 
@@ -140,11 +128,10 @@ router.put("/new-group", auth, (req, res) => {
         });
 
         newGroup.save((err, doc) => {
-            if(err){
+            if(err || !doc){
                 // return res.status(422).json({err});
                 return res.status(422).json({error : 'Oops! something went wrong! 2'});
             }
-    
     
             User.findByIdAndUpdate(user._id, {
                 $push : {
@@ -247,8 +234,6 @@ router.get('/join-group/:groupId', auth, (req, res) => {
             return res.status(400).json({"error": "Invalid request!"});
         }
 
-        console.log("payload", payload);
-
         Group.findByIdAndUpdate(payload.groupId, {
             $push: {
                 users: {
@@ -264,30 +249,16 @@ router.get('/join-group/:groupId', auth, (req, res) => {
                         reference: doc._id
                     }
                 }
-            }).then(user => {
-                return res.redirect(`/${doc.name}/textchannel/welcome`);
+            }).then(doc => {
+                return res.redirect(`/${doc.name}/textchannel/${welcome}`);
                 // res.json({success: "Joined group successfully!"});
             })
             .catch(err => {
-                console.log("Error updating User", err);
                 return res.status(422).json({error: "Oops! something went wrong!"});
             });
         }).catch(err => {
-            console.log("Error updating group", err);
             return res.status(422).json({error: "Oops! something went wrong!"});
         });
     });
 
 });
-
-router.get('profile/:username', auth, (req, res) => {
-    const {username} = req.params;
-    
-});
-
-//GET method for help 
-router.get("/help", auth, (req, res) => {
-    res.render('help');
-});
-
-module.exports = router;
