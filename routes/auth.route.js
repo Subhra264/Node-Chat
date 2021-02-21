@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const User = require('../models/UserModel');
 const { SECRET_KEY } = require('../config/keys');
 
 router.get('/log-in', (req, res) => {
@@ -14,12 +15,15 @@ router.post("/sign-up", (req, res) => {
     const { name, email, password } = req.body;
     //Check if name, password and email are given 
     if (!name || !email || !password) {
-        return res.json({ "error": "Please fill all the details!" });
+        return res.status(401).json({ "error": "Please fill all the details!" });
     }
 
     User.findOne({ email }, (err, doc) => {
         if (doc) {
-            return res.json({ "error": "User already exists!" });
+            return res.status(409).json({ "error": "User already exists!" });
+        }
+        if(err){
+            return res.status(422).json({"error": "Oops something wrong!"});
         }
         else {
             bcrypt.hash(password, 12)
@@ -55,18 +59,18 @@ router.post("/log-in", (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-        return res.status(402).json({ "error": "Please add all the fields!" });
+        return res.status(401).json({ "error": "Please add all the fields!" });
     }
 
     User.findOne({ email }, (err, doc) => {
         //If no such user exists
-        if (err) {
-            return res.status(402).json({ "error": "Invalid username or password!" });
+        if (err || !doc) {
+            return res.status(401).json({ "error": "Invalid username or password!" });
         }
 
         bcrypt.compare(password, doc.password, (err, success) => {
             if (err || !success) {
-                return res.status(402).json({ "error": "Invalid username or password!" });
+                return res.status(401).json({ "error": "Invalid username or password!" });
             }
 
             const token = jwt.sign({ _id: doc._id, name: doc.name }, SECRET_KEY);

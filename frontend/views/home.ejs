@@ -8,12 +8,15 @@
     <title>Node website</title>
 </head>
 <body>
-    <div class="main">
+    <div class="main text-center">
       <div class="alert alert-danger" role="alert" style="display: none;" id="error-container">
         <!-- Errors will appear here -->
       </div>
-      <h1>Chatting app</h1>
-      <h2>Sign Up</h2>
+      <div class="mb-5">
+        <h1>NodeChat</h1>
+        <h6>A Chatting Website</h6>
+      </div>
+      <h4>Sign Up</h4>
       <form >
           <div class="row mb-3">
             <label for="inputEmail3" class="col-sm-2 col-form-label">Name</label>
@@ -33,12 +36,11 @@
               <input type="password" class="form-control" id="password" required>
             </div>
           </div>
-          
-          <button type='submit' class="btn btn-primary" id='submit'>Sign in</button>
+          <button type='submit' class="btn btn-primary w-100" id='submit'>Sign in</button>
         </form>
-        <div>
+        <div class="mt-4">
           Already have an account??
-          <a href="/log-in">Log In</a>
+          <a href="/log-in" class="d-inline-block mx-3">Log In</a>
         </div>
     </div>
 
