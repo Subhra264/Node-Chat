@@ -29,4 +29,4 @@ Already implemented features are
 
 <b>Note : </b> Only desktop browsers are supported with the current design, still not responsive for mobile browsers.
 
-You can check the project on <a href='nodechat231.herokuapp.com'> Nodechat </a>
+You can check the project on <a href='https://nodechat231.herokuapp.com/'> Nodechat </a>
