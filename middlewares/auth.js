@@ -6,7 +6,7 @@ const User = require('../models/UserModel');
 module.exports = (req, res, next) => {
     let cookie = req.headers.cookie;
     let logInUrl = '/log-in';
-    if(req.url !== '/' || req.url !== '/log-in' || req.url !== '/sign-up') {
+    if(req.url !== '/' || req.url !== '/log-in' ) {
         logInUrl = logInUrl + "?target=" + req.url;
     }
 
