@@ -1,6 +1,5 @@
 const {MONGOURI} = require("./config/keys");
 const mongoose = require("mongoose");
-const router = require('./routes/routes');
 const {io, express, app, server} = require('./utils');
 const textChannelNamespace = require('./namespaces/textChannel');
 
@@ -11,9 +10,9 @@ app.use(express.json());
 app.set('views', './frontend/views');
 app.set('view engine', 'ejs');
 app.use('/frontend', express.static('./frontend/'));
-app.use(router);
+app.use(require('./routes/user.route'));
 app.use(require('./routes/auth.route'));
-// app.use(require('./routes/group.route'));
+app.use(require('./routes/group.route'));
 
 //Connect to the Mongodb
 mongoose.connect(MONGOURI, {

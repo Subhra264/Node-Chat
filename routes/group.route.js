@@ -4,6 +4,7 @@ const router = express.Router();
 const auth = require('../middlewares/auth');
 const Group = require('../models/GroupModel');
 const TextChannel = require('../models/TextChannelModel');
+const User = require('../models/UserModel');
 const jwt = require('jsonwebtoken');
 const { INVITE_GROUP_KEY } = require('../config/keys');
 
@@ -150,13 +151,7 @@ router.put("/new-group", auth, (req, res) => {
             });
             
         });
-
-
     });
-
-    
-
-    
 });
 
 //PUT method for creating new channel
@@ -262,3 +257,5 @@ router.get('/join-group/:groupId', auth, (req, res) => {
     });
 
 });
+
+module.exports = router;
