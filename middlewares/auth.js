@@ -5,10 +5,15 @@ const User = require('../models/UserModel');
 
 module.exports = (req, res, next) => {
     let cookie = req.headers.cookie;
+    let logInUrl = '/log-in';
+    if(req.url !== '/' || req.url !== '/log-in' || req.url !== '/sign-up') {
+        logInUrl = logInUrl + "?target=" + req.url;
+    }
 
+    console.log(logInUrl, req.url);
     //Check if there is authorization in the req headers
     if(!cookie){
-        return res.redirect('/log-in');
+        return res.redirect(logInUrl);
     }
 
     //Get all the cookie items
@@ -22,20 +27,20 @@ module.exports = (req, res, next) => {
     });
 
     if(!jwtToken) {
-        return res.redirect('/log-in');
+        return res.redirect(logInUrl);
         // return res.status(402).json({error : 'Invalid request!'});
     }
 
     const token = jwtToken.replace('token=','');
 
     if(!token){
-        return res.redirect('/log-in');
+        return res.redirect(logInUrl);
         // return res.status(402).json({error : 'Invalid request!'});
     }
 
     jwt.verify(token, SECRET_KEY, (err, payload) => {
         if(err) {
-            return res.redirect('/log-in');
+            return res.redirect(logInUrl);
             // return res.status(402).json({error : 'Invalid request!3'});
         }
 

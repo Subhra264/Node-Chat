@@ -26,7 +26,17 @@ submitButton.addEventListener('click', (e) => {
         }
         else{
             console.log(result.success);
-            location.pathname = "/help";
+            console.log(location);
+
+            if( location.search ) {
+                const params = new URLSearchParams(location.search);
+                location.search = '';
+                location.assign(params.get('target'));
+                
+
+            } else {
+                location.pathname = "/help";
+            }
         }
     }).catch(err => {
         console.log(err);
