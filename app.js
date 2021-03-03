@@ -114,11 +114,18 @@ app.get('/', (req , res) => {
     res.render('home');
 });
 
-app.get('/log-in', (req, res) => {
-    res.render('login');
+app.use((req, res, next) => {
+    const error = new Error('Not Found!');
+    error.status = 404;
+    next(error);
 });
 
-
+app.use((err, req, res, next) => {
+    return res.status(err.status).render('error', {
+        status: err.status,
+        message: err.message
+    });
+});
 
 server.listen(PORT , () => {
     console.log("Express server is listening on port number 8000...");
