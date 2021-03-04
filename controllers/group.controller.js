@@ -22,7 +22,10 @@ module.exports = {
         let groupId = null;
     
         if (!groupName || !channelName) {
-            return res.status(404).json({ error: "Invalid params!" });
+            return res.status(404).render('error', {
+                status: 404,
+                message: "Not Found!" 
+            });
         }
         
         user.groups.forEach(element => {
@@ -33,7 +36,10 @@ module.exports = {
         });
     
         if(!groupId){
-            return res.status(404).json({error : 'No such group exists in your profile!'});
+            return res.status(404).render('error', {
+                status: 404,
+                message : 'No such group exists in your profile!'
+            });
         }
     
         data.currentGroup = groupName;
@@ -41,8 +47,10 @@ module.exports = {
     
         Group.findById(groupId, (err, result) => {
             if(err) {
-                console.log("error retreiving Groups : " + err);
-                return res.status(402).json({error: "Oops! something went wrong!"});
+                return res.status(422).render( 'error', {
+                    message: "Oops! something went wrong!",
+                    status: 422
+                });
             }
     
             data.users = result.users;
@@ -57,7 +65,10 @@ module.exports = {
             });
     
             if(!channelId){
-                return res.status(404).json({error : 'No such channel exists in your profile!'});
+                return res.status(404).render('error', {
+                    status: 404,
+                    message: 'No such channel exists in your profile!'
+                });
             }
     
             data.currentTextChannel = channelId;
@@ -65,7 +76,10 @@ module.exports = {
     
             TextChannel.findById(channelId, (err, result) => {
                 if(err){
-                    return res.status(402).json({error: "Oops! something went wrong!"});
+                    return res.status(422).render('error', {
+                        status: 422,
+                        message: "Oops! something went wrong!"
+                    });
                 }
                 data.messages = result.textMessages;
     
@@ -81,7 +95,9 @@ module.exports = {
         const { groupName, channelName } = req.params;
     
         if (!groupName || !channelName) {
-            return res.status(401).json({ error: "Invalid params!" });
+            return res.status(404).render('error', { 
+                status: 404,
+                message: "Not Found!" });
         }
     
         //incomplete
