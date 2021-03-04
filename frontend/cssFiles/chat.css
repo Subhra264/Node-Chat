@@ -71,7 +71,7 @@ a{
     width: 85%;
     margin: auto;
 } */
-.add-group a{
+.add-group a, #add-new-group{
     display: inline-block;
     text-align: center;
     padding: 25%;
@@ -92,18 +92,27 @@ a{
     background-color:  rgb(196, 196, 199);
 }
 
-.group-creation-form{
-    padding : 1rem;
+.group-channel-creation-form{
+    padding : 1em;
     display: flex;
 }
 
-.group-creation-form input{
+.group-channel-creation-form input{
     display: inline-block;
-    padding: 4px;
+    flex-grow: 5;
+    padding: 0.4em;
     border: none;
     outline: none;
     box-shadow: 10px 4px 8px 4px rgb(170, 170, 170), 
-                -5px -4px 8px #eef5ff;;
+                -5px -4px 8px #eef5ff;
+}
+
+.group-channel-creation-form button{
+    display: inline-block;
+    padding: 0.5em;
+    flex-grow: 1;
+    box-shadow: 10px 4px 8px 4px rgb(170, 170, 170), 
+                -5px -4px 8px #eef5ff;
 }
 
 .channels{

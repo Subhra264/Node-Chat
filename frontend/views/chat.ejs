@@ -29,7 +29,7 @@
             <% data.groups.forEach( group => { %>
                 <a href="/<%= group %>/textchannel/welcome"><%= group %></a>
             <% }); %>
-            <div id='add-group' onclick="openGroupCreatorModal()">+</div>
+            <div id='add-new-group' onclick="openGroupCreatorModal()">+</div>
             <!-- THE MODAL BOX -->
             <div class="modal-box-container" id="create-new-group"> 
                 <div class="modal-box">
@@ -37,7 +37,7 @@
                         <div class="close-button-container" style="flex-grow: 1;">
                             <div class="close-button" onclick="closeModal(document.getElementById('create-new-group'))">&times;</div>
                         </div>
-                        <div class="group-creation-from">
+                        <div class="group-channel-creation-form">
                             <input type="text" id="groupNameInput" placeholder="Group name" required />
                             <button type="submit" onclick="createNewGroup()">Create Group</button>
                         </div>
@@ -69,8 +69,10 @@
                         <div class="close-button-container" style="flex-grow: 1;">
                             <div class="close-button" onclick="closeModal(document.getElementById('create-new-channel'))">&times;</div>
                         </div>
-                        <input type="text" placeholder="Channel name" id='channelNameInput' required/>
-                        <button type="submit" onclick="createChannel()">Create Channel</button>
+                        <div class="group-channel-creation-form">
+                            <input type="text" placeholder="Channel name" id='channelNameInput' required/>
+                            <button type="submit" onclick="createChannel()">Create Channel</button>
+                        </div>
                     </div>
                 </div>
             </div>
