@@ -10,7 +10,6 @@ module.exports = (req, res, next) => {
         logInUrl = logInUrl + "?target=" + req.url;
     }
 
-    console.log(logInUrl, req.url);
     //Check if there is authorization in the req headers
     if(!cookie){
         return res.redirect(logInUrl);
