@@ -173,7 +173,7 @@
             </div>
             <% data.users.forEach( user => { %>
             <div class="perticipants">
-                <a href='/users/<%=user.reference %>'>
+                <a href='/profile/<%=user.reference %>'>
                     <%= user.name %>
                     <% if(JSON.stringify(user.reference) == JSON.stringify(data.user._id)) { %>
                         (you)
