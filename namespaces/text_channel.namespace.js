@@ -4,7 +4,6 @@ const { INVITE_GROUP_KEY } = require('../config/keys');
 
 module.exports = function (){
 
-
     const textChannels = io.of(/^\/(\w+)\/textchannel\/(\w+)$/);
 
     const users = {};

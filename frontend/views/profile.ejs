@@ -8,5 +8,11 @@
 </head>
 <body>
     Name: <%= name %>
+    <% if(!isSameUser) {%>
+        <button type="submit" onclick="sendFriendRequest(this)"> Send Friend Request</button>
+    <% } %>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/frontend/jsFiles/chat.js"></script>
 </body>
 </html>

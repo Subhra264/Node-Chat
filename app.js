@@ -1,7 +1,7 @@
 const {MONGOURI} = require("./config/keys");
 const mongoose = require("mongoose");
 const {io, express, app, server} = require('./utils');
-const textChannelNamespace = require('./namespaces/textChannel');
+const textChannelNamespace = require('./namespaces/text_channel.namespace');
 
 const PORT = process.env.PORT || 8000;
 
@@ -10,7 +10,7 @@ app.use(express.json());
 app.set('views', './frontend/views');
 app.set('view engine', 'ejs');
 app.use('/frontend', express.static('./frontend/'));
-app.use(require('./routes/user.route'));
+app.use(require('./routes/profile.route'));
 app.use(require('./routes/auth.route'));
 app.use(require('./routes/group.route'));
 
