@@ -17,12 +17,14 @@ module.exports = {
                     message: "Not Found!"
                 });
             }
-
-            const isSameUser = JSON.stringify(req.user._id) === JSON.stringify(user._id);
     
             res.render('profile', {
                 name: user.name,
-                isSameUser 
+                userId: user._id,
+                thisUser: {
+                    _id: req.user._id,
+                    name: req.user.name
+                }
             });
         });
     }

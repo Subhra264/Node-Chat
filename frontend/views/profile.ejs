@@ -8,11 +8,21 @@
 </head>
 <body>
     Name: <%= name %>
-    <% if(!isSameUser) {%>
+    <% if(JSON.stringify(userId) !== JSON.stringify(thisUser._id)) {%>
         <button type="submit" onclick="sendFriendRequest(this)"> Send Friend Request</button>
     <% } %>
 
+    <div id="friend-req-container">
+        
+    </div>
+
     <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const thisUserId = '<%= thisUser._id %>';
+        const thisUserName = '<%= thisUser.name %>';
+        const thatUserId = '<%= userId %>';
+        const thatUserName = '<%= name %>';
+    </script>
     <script src="/frontend/jsFiles/chat.js"></script>
 </body>
 </html>
