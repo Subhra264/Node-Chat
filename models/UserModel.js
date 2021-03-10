@@ -44,6 +44,20 @@ const userSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref : "User"
         }
+    ],
+
+    recievedFriendRequests: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "User"
+        }
+    ],
+
+    sentFriendRequests: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "User"
+        }
     ]
 });
 

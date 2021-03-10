@@ -6,7 +6,29 @@ module.exports = () => {
 
     profileNameSpaces.on('connection', (socket) => {
         socket.on('sendFriendRequest', ( sender, sentTo ) => {
-            socket.to(sentTo.socketId).emit('gotFriendRequest', sender);
+
+            User.findByIdAndUpdate(sentTo._id, {
+                $push: {
+                    recievedFriendRequests: sender._id
+                }
+            }, (err, user) => {
+                if(err || !user) {
+                    console.log('Error saving recieved friend requests!');
+                }
+
+                User.findByIdAndUpdate(sender._id, {
+                    $push: {
+                        sentFriendRequests: sentTo._id
+                    }
+                }, (err, user) => {
+                    if(err || !user) {
+                        console.log('Error saving sent friend requests!');
+                    }
+
+                    socket.to(sentTo.socketId).emit('gotFriendRequest', sender);
+                    console.log('All the operations are done successfully!');
+                });
+            });
         });
 
         socket.on('acceptedFriendRequest' , friends => {

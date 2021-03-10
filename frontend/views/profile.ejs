@@ -13,8 +13,18 @@
     <% } %>
 
     <div id="friend-req-container">
-        
+        <% if(thisUser.recievedFriendRequests) { %>
+            <% thisUser.recievedFriendRequests.foreach( request => { %>
+                <div>
+                    <div class="name">
+                        <%= request.name %>
+                    </div>
+                    <button type="button" >Accept Request</button>
+                </div>
+            <% }) %>
+        <% } %>
     </div>
+    
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
@@ -23,6 +33,6 @@
         const thatUserId = '<%= userId %>';
         const thatUserName = '<%= name %>';
     </script>
-    <script src="/frontend/jsFiles/chat.js"></script>
+    <script src="/frontend/jsFiles/profile.js"></script>
 </body>
 </html>

@@ -39,6 +39,7 @@ mongoose.connection.on("error", (err) => {
 // });
 
 textChannelNamespace();
+require('./namespaces/profile.namespace')();
 // const textChannels = io.of(/^\/(\w+)\/textchannel\/(\w+)$/);
 
 // const users = {};

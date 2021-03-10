@@ -23,7 +23,8 @@ module.exports = {
                 userId: user._id,
                 thisUser: {
                     _id: req.user._id,
-                    name: req.user.name
+                    name: req.user.name,
+                    recievedFriendRequests: req.user.recievedFriendRequests
                 }
             });
         });
