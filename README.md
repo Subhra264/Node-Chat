@@ -1,8 +1,13 @@
 # NodeChat
-This is a chatting application (still under development) built with node.js, ejs and socket.io. Design is based on Neo-morphism.
 
-# Features
-Already implemented features are 
+![Node Chat App screen shot](./assets/node_chat_group.png)
+
+This is a chatting application built with `node.js`, `ejs` and `socket.io`. Design is based on Neo-morphism.\
+
+## Features
+
+Already implemented features are
+
 <ol>
     <li>User can Sign Up and Log in</li>
     <li>User can create groups</li>
@@ -16,7 +21,8 @@ Already implemented features are
     <li>Log in</li>
 </ol>
 
-# Technologies used : 
+# Technologies used :
+
 <ul>
     <li>Node.js</li>
     <li>Express</li>
@@ -28,4 +34,3 @@ Already implemented features are
 </ul>
 
 <b>Note : </b> Only desktop browsers are supported with the current design, still not responsive for mobile browsers.
-
